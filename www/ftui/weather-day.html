@@ -1,0 +1,31 @@
+<ftui-column>
+  <ftui-label text="{{time}}:00" size="1" unit="" class="my-header"></ftui-label>
+  <ftui-row>
+
+    <ftui-column align-item="left" style="margin-left:1em;">
+      <ftui-row>
+        <ftui-icon name="thermometer-3" class="my-size--3" style="margin-left:0.5em;"></ftui-icon>
+        <ftui-column align-item="center">
+          <ftui-label [text]="Wetter_EF_Agrar:fc0_temp{{time}}" size="4" unit="°C"></ftui-label>
+        </ftui-column>
+      </ftui-row>
+      <ftui-row>
+        <ftui-icon name="umbrella" class="my-size--1" color="blue"></ftui-icon>
+        <ftui-column align-item="center">
+          <ftui-label [text]="Wetter_EF_Agrar:fc0_rain{{time}}" size="2"><span slot="end" class="size-1">&nbsp;mm</span></ftui-label>
+          <ftui-label [text]="Wetter_EF_Agrar:fc0_chOfRain{{time}}" size="2"><span slot="end" class="size-1">&nbsp;%</span></ftui-label>
+        </ftui-column>
+      </ftui-row>      
+    </ftui-column>
+
+    <ftui-column align-items="center"> 
+      <ftui-label [text]="Wetter_EF_Agrar:fc0_weather{{time}}"></ftui-label>
+      <ftui-weather
+        provider="proplantaICON"
+        icon-set="basfill" 
+        [condition]="Wetter_EF_Agrar:fc0_weather{{time}}Icon | replace('https://www.proplanta.de/wetterdaten/images/symbole/','') | replace('.gif','')"
+        class="size-4"></ftui-weather>      
+    </ftui-column>
+  </ftui-row>  
+
+</ftui-column>

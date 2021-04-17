@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+    /* FHEM tablet ui - FTUI */
+    /**
+    * UI builder framework for FHEM
+    *
+    * Version: 3.0.0
+    *
+    * Copyright (c) 2015-2020 Mario Stephan <mstephan@shared-files.de>
+    * Under MIT License (http://www.opensource.org/licenses/mit-license.php)
+    * https://github.com/knowthelist/ftui
+    */
+    -->
+  <script src="ftui.js"></script>
+
+  <link href="ftui.css" rel="stylesheet">
+  <link href="themes/ftui-theme.css" rel="stylesheet">
+  <link href="themes/custom.css" rel="stylesheet">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+
+  <!-- avoid 300ms delay on click-->
+  <meta name="viewport" content="width=device-width">
+
+  <!-- when serving the page with other web servers, e.g. lighttpd -->
+  <!-- <meta name="fhemweb_url" content="http://fhem.local:8083/fhem/"> -->
+
+  <!-- verbose level 0-4 -->
+  <meta name="debug" content="2">
+
+  <!-- toast messages 0-5 -->
+  <meta name="toast" content="4">
+
+  <title>FTUI</title>
+</head>
+
+<body>
+
+  <!-- <ftui-grid responsive ???>-->
+  <!-- max grid height="8" width="16"=-->
+  <ftui-grid base-width="80" base-height="100" margin="3">
+
+    <!--Menu-->
+  <ftui-grid-tile row="1" col="16" height="8" width="1">
+    <header>Menu</header>
+    <ftui-column align-items="top">
+      <ftui-tab style="margin-top:2em;" view="Home" fill="solid" shape="circle" class="size-3" active><ftui-icon name="home1"></ftui-icon></ftui-tab>
+      <ftui-tab style="margin-top:2em;" view="Weather" fill="solid" shape="circle" class="size-3"><ftui-icon name="weather"></ftui-icon></ftui-tab>
+      <ftui-tab style="margin-top:2em;" view="Storms" fill="solid" shape="circle" class="size-3"><ftui-icon name="sunny-thunderstorm"></ftui-icon></ftui-tab>
+    </ftui-column>          
+  </ftui-grid-tile> 
+
+  <ftui-tab-view id="Home">
+    <!--Uhr-->
+    <ftui-grid-tile row="1" col="1" height="1" width="5">
+    <header>Uhrzeit</header>
+    <ftui-row>
+        <ftui-column align-items="center" margin="0">
+            <ftui-clock format="hh:mm:ss" class="size-6"></ftui-clock>        
+            <ftui-clock format="ee. DD.MM.YY" class="size-2"></ftui-clock>
+        </ftui-column>
+        
+        <ftui-column align-items="right" style="margin-right:2em"> 
+            <ftui-row align-items="right">
+                <ftui-icon name="weather-sunset-up" class="my-size--2" color="my-orange" style="margin-right:10px"></ftui-icon>
+                <ftui-label [text]="Wetter_EF_Agrar:fc0_sunRise" size="2" class="thin"></ftui-label>
+            </ftui-row>
+            <ftui-row align-items="right">
+                <ftui-icon name="weather-sunset-down" class="my-size--2" color="my-orange" style="margin-right:10px"></ftui-icon>
+                <ftui-label [text]="Wetter_EF_Agrar:fc0_sunSet" size="2" class="thin"></ftui-label> 
+            </ftui-row>             
+        </ftui-column>
+    </ftui-row>
+    </ftui-grid-tile>
+
+    <!-- DEPARTURE -->
+    <ftui-grid-tile row="2" col="1" height="2" width="5" align-items="top"> 
+    <header>Abfahrt &#10145; HBF</header>
+    <ftui-row>          
+        <ftui-column align-items="top">
+        <ftui-row>
+            <ftui-cell style="font-size:0.6em">&nbsp;</ftui-cell>            
+            <ftui-label text=Abfahrt class="size-3 thin"></ftui-label>
+        </ftui-row>
+
+        <ftui-row>
+            <ftui-icon name="clock-o" style="font-size:0.6em"
+                        [color]="db:plan_departure_delay_1 | map('0:my-lightgreen, 3:my-orange, 6:red')"></ftui-icon>
+            <ftui-label [text]="db:plan_departure_1" class="size-3"></ftui-label>
+        </ftui-row>
+
+        <ftui-row>
+            <ftui-icon name="clock-o" style="font-size:0.6em"
+                    [color]="db:plan_departure_delay_2 | map('0:my-lightgreen, 3:my-orange, 6:red')"></ftui-icon>
+            <ftui-label [text]="db:plan_departure_2" class="size-3"></ftui-label>
+        </ftui-row>
+
+        <ftui-row>
+            <ftui-icon name="clock-o" style="font-size:0.6em"
+                    [color]="db:plan_departure_delay_3 | map('0:my-lightgreen, 3:my-orange, 6:red')"></ftui-icon>
+            <ftui-label [text]="db:plan_departure_3" class="size-3"></ftui-label>
+        </ftui-row>
+        </ftui-column>
+        <ftui-column align-items="top">                        
+        <ftui-row>
+            <ftui-cell style="font-size:0.6em"><span style="margin-left:4em">&nbsp;</span></ftui-cell>
+            <ftui-label text=Delay class="size-3 thin"></ftui-label>
+        </ftui-row>
+
+        <ftui-row>
+            <ftui-cell style="font-size:0.6em">&nbsp;</ftui-cell>
+            <ftui-label [text]="db:plan_departure_delay_1" class="size-3"
+                        [color]="db:plan_departure_delay_1 | map('6:red')"></ftui-label>      
+        </ftui-row>
+        
+        <ftui-row>
+            <ftui-cell style="font-size:0.6em">&nbsp;</ftui-cell>
+            <ftui-label [text]="db:plan_departure_delay_2" class="size-3"
+                        [color]="db:plan_departure_delay_2 | map('6:red')"></ftui-label>
+        </ftui-row>
+        
+        <ftui-row>
+            <ftui-cell style="font-size:0.6em">&nbsp;</ftui-cell>
+            <ftui-label [text]="db:plan_departure_delay_3" class="size-3"
+                        [color]="db:plan_departure_delay_3 | map('6:red')"></ftui-label>
+        </ftui-row>           
+        </ftui-column>
+
+        <ftui-column align-items="top">
+        <ftui-row>
+            <ftui-cell style="font-size:0.6em"><span style="margin-left:4em">&nbsp;</span></ftui-cell>
+            <ftui-label text=Gleis class="size-3 thin"></ftui-label>
+        </ftui-row>
+        <!-- keine Zahlen ersetzen -->
+        <ftui-row>
+            <ftui-cell style="font-size:0.4em">&nbsp;</ftui-cell>
+            <ftui-label [text]="db:travel_departure_1 | replace(/\D+/,'')" class="size-3"></ftui-label>
+        </ftui-row>
+        <ftui-row>
+            <ftui-cell style="font-size:0.4em">&nbsp;</ftui-cell>
+            <ftui-label [text]="db:travel_departure_2 | replace(/\D+/,'')" class="size-3"></ftui-label>
+        </ftui-row>
+        <ftui-row>
+            <ftui-cell style="font-size:0.4em">&nbsp;</ftui-cell>
+            <ftui-label [text]="db:travel_departure_3 | replace(/\D+/,'')" class="size-3"></ftui-label>
+        </ftui-row>
+        </ftui-column>
+        <ftui-column align-items="top">
+        <ftui-row>              
+            <ftui-label text=Art class="size-3 thin"></ftui-label>
+        </ftui-row>                                      
+        
+        <ftui-row>
+            <ftui-icon [name]="db:plan_connection_1 | map('RB:train, BUS:bus')" style="font-size:0.6em"></ftui-icon>
+            <ftui-label [text]="db:plan_connection_1| map('RB:RB&nbsp;, BUS:Bus')" class="size-3"></ftui-label>
+        </ftui-row>
+
+        <ftui-row>
+            <ftui-icon [name]="db:plan_connection_2 | map('RB:train, BUS:bus')" style="font-size:0.6em"></ftui-icon>
+            <ftui-label [text]="db:plan_connection_2| map('RB:RB&nbsp;, BUS:Bus')" class="size-3"></ftui-label>
+        </ftui-row>
+
+        <ftui-row>
+            <ftui-icon [name]="db:plan_connection_3 | map('RB:train, BUS:bus')" style="font-size:0.6em"></ftui-icon>
+            <ftui-label [text]="db:plan_connection_3| map('RB:RB&nbsp;, BUS:Bus')" class="size-3"></ftui-label>
+        </ftui-row>
+        </ftui-column>
+    </ftui-row>
+    </ftui-grid-tile>
+    
+
+    <!--Abfall-->
+    <ftui-grid-tile row="4" col="1" height="2" width="5">
+      <header>Abfall</header>
+      <ftui-row style="margin-top:4em">
+          <ftui-column align-items="top">
+          <!--map('0:spin, 1:hop, 2:' numerische interpretation "ab" -->
+          <ftui-icon name="trash" color="brown" [class-name]="waste_bio:state | map('`Heute`:spin size-4, `Morgen`:hop size-4, 2:size-4')">
+            <ftui-badge [text]="waste_bio:state" 
+                        [color]="waste_bio:state | map('`Heute`:danger, `Morgen`:my-darkred, 2:gray')" class="size-1">
+            </ftui-badge>
+          </ftui-icon>
+          <ftui-label text="Bio" class="size-0"></ftui-label>
+        </ftui-column>
+        <ftui-column align-items="top">
+            <ftui-icon name="trash" color="black" [class-name]="waste_house:state | map('`Heute`:spin size-4, `Morgen`:hop size-4, 2:size-4')">
+            <ftui-badge [text]="waste_house:state"
+                        [color]="waste_house:state | map('`Heute`:danger, `Morgen`:my-darkred, 2:gray')" class="size-1">
+            </ftui-badge>
+            </ftui-icon>
+            <ftui-label text="Haus" class="size-0"></ftui-label>
+        </ftui-column>
+        <ftui-column align-items="top">
+            <ftui-icon name="trash" color="blue" [class-name]="waste_paper:state | map('`Heute`:spin size-4, `Morgen`:hop size-4, 2:size-4')">
+            <ftui-badge [text]="waste_paper:state"
+                        [color]="waste_paper:state | map('`Heute`:danger, `Morgen`:my-darkred, 2:gray')" class="size-1">
+            </ftui-badge>
+            </ftui-icon>
+            <ftui-label text="Papier" class="size-0"></ftui-label>
+        </ftui-column>
+        <ftui-column align-items="top">
+            <ftui-icon name="trash" color="yellow" [class-name]="waste_plastic:state | map('`Heute`:spin size-4, `Morgen`:hop size-4, 2:size-4')">
+            <ftui-badge [text]="waste_plastic:state" 
+                        [color]="waste_plastic:state | map('`Heute`:danger, `Morgen`:my-darkred, 2:gray')" class="size-1">
+            </ftui-badge>
+            </ftui-icon>
+            <ftui-label text="Plastik" class="size-0"></ftui-label>
+        </ftui-column>
+      </ftui-row>
+    </ftui-grid-tile>
+
+    <!--Termine-->
+    <ftui-grid-tile row="6" col="1" height="3" width="5">
+      <header>Termine</header>
+      <ftui-column align-items="top center">
+        <ftui-content file="./cal-entry.html" cal-id="001"></ftui-content>
+        <ftui-content file="./cal-entry.html" cal-id="002"></ftui-content>
+        <ftui-content file="./cal-entry.html" cal-id="003"></ftui-content> 
+        <ftui-content file="./cal-entry.html" cal-id="004"></ftui-content>
+        <ftui-content file="./cal-entry.html" cal-id="005"></ftui-content>
+        <ftui-content file="./cal-entry.html" cal-id="006"></ftui-content> 
+      </ftui-column>
+    </ftui-grid-tile>
+
+    <!--Wetter-->
+    <ftui-grid-tile row="1" col="6" height="8" width="3">
+      <header>Wetter</header>
+      <ftui-row align-items="center" margin="0" height="16.5%">
+        <ftui-cell margin="2">
+          <ftui-row align-items="top" style="margin-bottom:0.7em;">
+              <ftui-icon name="temp_temperature_min" path="../images/openautomation" class="size-0"></ftui-icon>
+              <ftui-label [text]="Wetter_EF_Agrar:fc0_tempMin" size="3" unit="°C" style="margin-left:0.3em;"></ftui-label>
+          </ftui-row>
+          <ftui-row align-items="bottom" style="margin-top:0.7em;">
+              <ftui-icon name="temp_temperature_max" path="../images/openautomation" class="size-0"></ftui-icon>
+              <ftui-label [text]="Wetter_EF_Agrar:fc0_tempMax" size="3" unit="°C" style="margin-left:0.3em;"></ftui-label>
+          </ftui-row>
+        </ftui-cell>
+        <ftui-cell margin="2">
+          <ftui-row align-items="top" style="margin-bottom:0.7em;">
+            <ftui-icon name="sun" class="size-0"></ftui-icon>
+            <ftui-label [text]="Wetter_EF_Agrar:fc0_sun" size="3" unit="%" style="margin-left:0.3em;"></ftui-label>
+          </ftui-row>
+          <ftui-row align-items="bottom" style="margin-top:0.7em;">
+            <ftui-icon name="rainy1" class="size-0" style="margin-right:0.3em;"></ftui-icon>
+            <ftui-column align-item="center">
+              <ftui-label [text]="Wetter_EF_Agrar:fc0_rain" size="2" unit="mm"></ftui-label>
+              <ftui-label [text]="Wetter_EF_Agrar:fc0_chOfRainDay" size="2" unit="%"></ftui-label>
+            </ftui-column>
+        </ftui-row>
+        </ftui-cell>
+      </ftui-row>
+      <ftui-column>      
+        <ftui-content file="weather-day.html" time="06"></ftui-content>
+        <ftui-content file="weather-day.html" time="09"></ftui-content>
+        <ftui-content file="weather-day.html" time="12"></ftui-content>
+        <ftui-content file="weather-day.html" time="18"></ftui-content>
+        <ftui-content file="weather-day.html" time="21"></ftui-content>        
+      </ftui-column>
+    </ftui-grid-tile>    
+
+    <!--Temperaturen-->
+    <ftui-grid-tile row="1" col="9" height="2" width="3">
+    <header>Temperaturen</header>
+    <ftui-column>
+      <ftui-row>
+        <ftui-cell>
+          <ftui-row align-items="left">
+            <ftui-icon name="thermometer-3" class="size-1"></ftui-icon>
+            <ftui-label [text]="PI_TEMP_Eingang:temperature" unit="°C"></ftui-label>
+          </ftui-row>
+          <ftui-label text="Eingang" class="my-mt-05"></ftui-label>
+        </ftui-cell>
+        <ftui-cell>
+          <ftui-row align-items="left">
+            <ftui-icon name="thermometer-3" class="size-1"></ftui-icon>
+            <ftui-label [text]="PI_TEMP_Garten:temperature" unit="°C"></ftui-label>
+          </ftui-row>
+          <ftui-label text="Garten" class="my-mt-05"></ftui-label>
+        </ftui-cell>
+      </ftui-row>
+
+      <ftui-row>
+        <ftui-cell>
+          <ftui-row align-items="left">
+            <ftui-icon name="thermometer-3" class="size-1"></ftui-icon>
+            <ftui-label [text]="json_wu_IERFUR95:temp" unit="°C"></ftui-label>
+          </ftui-row>
+          <ftui-label text="Bischleben" class="my-mt-05"></ftui-label>
+        </ftui-cell>
+        <ftui-cell>
+          <ftui-row align-items="left">
+            <ftui-icon name="thermometer-3" class="size-1"></ftui-icon>
+            <ftui-label [text]="json_wu_ITHHOCHH7:temp" unit="°C"></ftui-label>
+          </ftui-row>
+          <ftui-label text="Fuchsfarm" class="my-mt-05"></ftui-label>
+        </ftui-cell>
+      </ftui-row>
+    </ftui-column>
+    </ftui-grid-tile>
+
+    <!--Sonstiges-->
+    <ftui-grid-tile row="3" col="9" height="2" width="3">
+    <header>Status</header>
+    <ftui-column>
+      <ftui-row>
+        <ftui-cell>
+          <ftui-icon 
+            [name]="MAX_BAD_SHUTTER:state | map('opened:window-open-variant,.*:window-closed-variant')"
+            [color]="MAX_BAD_SHUTTER:state | map('opened:my-darkred,.*:my-lightgreen')"
+            class="size-1"></ftui-icon>
+          <ftui-label text="Badfenster" class="my-mt-025"></ftui-label>
+        </ftui-cell>
+
+        <ftui-cell>
+          <ftui-icon 
+            name="car-battery"
+            [color]="d_batterystate:batteryState | map('low:my-darkred,.*:my-lightgreen')"
+            class="size-1"></ftui-icon>
+          <ftui-label text="Batterien" class="my-mt-025"></ftui-label>
+        </ftui-cell>
+      </ftui-row>
+    </ftui-column>
+    <ftui-column>
+      <ftui-cell>
+        <ftui-row>
+          <ftui-icon 
+            [name]="WAX28M42:state | map('Offline:washing-machine-off,.*:washing-machine')"
+            [color]="WAX28M42:state | map('.*active.*:my-orange,.*Idle.*:my-lightgreen,.*:gray')"          
+            class="size-1"></ftui-icon>
+          <ftui-column>
+            <ftui-label [text]="WAX28M42:BSH.Common.Option.ProgramProgress" class="my-mt-025"></ftui-label>
+            <ftui-label [text]="WAX28M42:BSH.Common.Option.RemainingProgramTime | replace(' seconds','') | multiply(1/60) | round(1)" class="my-mt-025" unit="min"></ftui-label>
+          </ftui-column>
+        </ftui-row>
+        <ftui-label text="Waschmaschine" class="my-mt-025"></ftui-label>
+      </ftui-cell>
+    </ftui-column>
+      
+    </ftui-grid-tile>
+
+    <ftui-grid-tile row="5" col="9" height="1" width="3">
+    <header>Licht</header>
+    <ftui-cell>
+      <ftui-button shape="round"
+        [color]="GA_Dimmer:state | map('off:gray,on:my-lightgreen')"
+        [(value)]="GA_Dimmer">
+        <ftui-icon 
+          [name]="GA_Dimmer:state  | map('on:lightbulb-on, off:lightbulb')"
+          [color]="GA_Dimmer:state | map('off:white,on:my-orange')"                    
+          class="my-size--2">
+        </ftui-icon>
+      </ftui-button>
+      <ftui-label text="Garten" class="my-mt-025"></ftui-label>    
+    </ftui-cell>
+    </ftui-grid-tile>
+
+    <ftui-grid-tile row="6" col="9" height="3" width="3">
+    <header>Unwetterwarnung</header>
+      <ftui-column align-items="top center">
+        <ftui-cell class="my-mt-05" [hidden]="d_unwetter:state | is('0')">
+          <ftui-row align-items="center">
+            <ftui-image [src]="d_unwetter:Warn_0_Icon" width="50px"></ftui-image>
+            <ftui-column class="my-ml-1"> 
+              <ftui-label [text]="d_unwetter:Warn_0_Start | toDate() | format('DD.MM hh:mm')"></ftui-label>
+              <ftui-label text="bis" class="size--3"></ftui-label>
+              <ftui-label [text]="d_unwetter:Warn_0_End | toDate() | format('DD.MM hh:mm')"></ftui-label>
+            </ftui-column>
+          </ftui-row>
+        </ftui-cell>
+        <ftui-cell class="my-mt-05" [hidden]="d_unwetter:state | is('0')">
+          <ftui-label [text]="d_unwetter:Warn_0_Text" margin="5px" scroll="True"></ftui-label>
+        </ftui-cell>
+        <ftui-cell class="my-mt-05" [hidden]="d_unwetter:state | isNot('0')">
+          <ftui-label text="Aktuell keine" margin="5px"></ftui-label>
+        </ftui-cell>
+      </ftui-column>      
+    </ftui-grid-tile>
+
+    <!-- Heizung -->
+    <ftui-grid-tile row="1" col="12" height="8" width="4">
+      <header>Heizung</header>
+      <ftui-column align-items="top center">
+          <ftui-content file="./wt_all.html" device="WT_ALL" displayname="Alle" margin-top="1.5em"></ftui-content>
+          <ftui-label text="Räume" size="1" unit="" style="margin-top:2.2em;" class="my-header"></ftui-label>
+          <ftui-content file="./thermostat.html" device="FAKE_WZ_WT" displayname="Stube" margin-top="1em"></ftui-content>
+          <ftui-content file="./thermostat.html" device="FAKE_FLUR_WT" displayname="Flur" margin-top="1em"></ftui-content>
+          <ftui-content file="./thermostat.html" device="FAKE_KUECHE_WT" displayname="Küche" margin-top="1em"></ftui-content>
+          <ftui-content file="./thermostat.html" device="FAKE_BAD_WT" displayname="Bad" margin-top="1em"></ftui-content>
+          <ftui-content file="./thermostat.html" device="FAKE_BUERO_WT" displayname="Büro" margin-top="1em"></ftui-content>           
+      </ftui-column>
+    </ftui-grid-tile>
+  </ftui-tab-view>
+  <!-- End Home-->
+ 
+  <!-- Wettervorhersage -->
+  <ftui-tab-view id="Weather">
+    <ftui-grid-tile row="1" col="1" height="2" width="15">
+      <header>
+        <ftui-row align-items="left">
+          <ftui-clock format="ee. DD.MM.YY" class="size-0"></ftui-clock>
+          <ftui-cell width="500px">&nbsp;</ftui-cell>
+          <ftui-cell>Wettervorhersage</ftui-cell>
+        </ftui-row>
+        </header>
+      <ftui-content file="weather.html"></ftui-content>
+    </ftui-grid-tile>
+
+    <ftui-grid-tile row="3" col="1" height="3" width="10">
+      <ftui-row align-items="top center" class="my-mt-05">
+        <ftui-image height="290px" class="my-ml-05" interval="1200" src="https://www.dwd.de/DWD/wetter/wv_allg/deutschland/bilder/vhs_thu_morgenfrueh.jpg"></ftui-image>
+        <ftui-image height="290px" class="my-ml-05" interval="1200" src="https://www.dwd.de/DWD/wetter/wv_allg/deutschland/bilder/vhs_thu_morgenspaet.jpg"></ftui-image>
+      </ftui-row>      
+    </ftui-grid-tile>
+
+    <ftui-grid-tile row="6" col="1" height="3" width="10">
+      <ftui-cell>
+          <ftui-image interval="1200" src="https://www.yr.no/en/content/2-2929670/meteogram.svg"></ftui-image>
+      </ftui-cell>
+    </ftui-grid-tile>
+
+    <ftui-grid-tile row="3" col="11" height="6" width="5">
+      <ftui-cell>
+        <ftui-image interval="1200" src="https://ferienwetter24.de/grafik/cloudprecip.gif"></ftui-image>
+        <ftui-image interval="1200" src="https://ferienwetter24.de/layout/legende_wolken.png"></ftui-image>
+      </ftui-cell>
+    </ftui-grid-tile>
+
+  </ftui-tab-view>
+
+  <!-- Unwetter -->
+  <ftui-tab-view id="Storms">
+    <ftui-grid-tile row="1" col="1" height="5" width="10">
+      <header>Wasserpegel</header>
+      <ftui-column align-items="top" class="my-mt-05">
+          <ftui-image height="450px" interval="1200" src="http://hnz.thueringen.de/hw.inc/diag/57421.0_w.png"></ftui-image>
+      </ftui-column>
+    </ftui-grid-tile>
+
+    <ftui-grid-tile row="1" col="11" height="8" width="5">
+      <header>Unwetterwarnung</header>
+      <ftui-column align-items="top" class="my-mt-05">
+          <ftui-image interval="1200" src="http://www.unwetterzentrale.de/images/map/thueringen_index.png"></ftui-image>
+      </ftui-column>
+    </ftui-grid-tile>
+
+    
+  </ftui-tab-view>
+
+  <ftui-tab-view id="Light">
+    <ftui-grid-tile row="1" col="1" height="8" width="15">
+      <div class="size-10">Licht</div>
+    </ftui-grid-tile> 
+  </ftui-tab-view>
+    
+  </ftui-grid>
+
+</body>
+
+</html>

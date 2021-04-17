@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+    /* FHEM tablet ui - FTUI */
+    /**
+    * UI builder framework for FHEM
+    *
+    * Version: 3.0.0
+    *
+    * Copyright (c) 2015-2020 Mario Stephan <mstephan@shared-files.de>
+    * Under MIT License (http://www.opensource.org/licenses/mit-license.php)
+    * https://github.com/knowthelist/ftui
+    */
+    -->
+  <script src="ftui.js"></script>
+
+  <link href="ftui.css" rel="stylesheet">
+  <link href="themes/ftui-theme.css" rel="stylesheet">
+  <link href="themes/custom.css" rel="stylesheet">
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+
+  <!-- avoid 300ms delay on click-->
+  <meta name="viewport" content="width=device-width">
+
+  <!-- when serving the page with other web servers, e.g. lighttpd -->
+  <!-- <meta name="fhemweb_url" content="http://fhem.local:8083/fhem/"> -->
+
+  <!-- verbose level 0-4 -->
+  <meta name="debug" content="2">
+
+  <!-- toast messages 0-5 -->
+  <meta name="toast" content="4">
+
+  <title>FTUI</title>
+</head>
+
+<body>
+
+  <!-- <ftui-grid responsive ???>-->
+  <ftui-grid base-width="100" base-height="150" margin="1">
+
+    <ftui-grid-tile row="1" col="1" height="1" width="1">
+    <header>Licht</header>
+    <ftui-cell>
+        <ftui-button shape="round"
+        [color]="GA_Dimmer:state | map('off:gray,on:my-lightgreen')"
+        [(value)]="GA_Dimmer">
+        <ftui-icon 
+            [name]="GA_Dimmer:state  | map('on:lightbulb-on, off:lightbulb')"
+            [color]="GA_Dimmer:state | map('off:white,on:my-orange')"                    
+            class="my-size--2">
+        </ftui-icon>
+        </ftui-button>
+        <ftui-label text="Garten" class="my-mt-025"></ftui-label>    
+    </ftui-cell>
+    </ftui-grid-tile>
+    
+  </ftui-grid>
+
+</body>
+
+</html>

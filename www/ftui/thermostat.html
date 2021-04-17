@@ -1,0 +1,55 @@
+<ftui-cell style="margin-top:{{margin-top}};">
+<!--untereinander-->
+<ftui-column align-items="top" class="my-thermostat"> 
+
+    <ftui-row class="h-20">
+        <ftui-label	text="{{displayname}}" margin="1"></ftui-label>
+    </ftui-row>
+
+    <!--nebeneinander-->
+	<ftui-row class="my-spinner">
+		<ftui-column align-items="left">
+			<ftui-button [value]="{{device}}:desiredTemperature"
+				(value)="add(-0.5) | {{device}}:desiredTemperature" states="$value" fill="clear">
+				<ftui-icon name="minus" color="my-lightblue" size="2"></ftui-icon>
+			</ftui-button>
+		</ftui-column>
+		<ftui-column style="width:25%;">
+			<ftui-label	[text]="{{device}}:desiredTemperature | fix(1)" style="margin-left:0.2em;" class="bold" unit="&nbsp;&deg;C"></ftui-label>
+		</ftui-column>
+		<ftui-column align-items="right">
+			<ftui-button [value]="{{device}}:desiredTemperature"
+				(value)="add(0.5) | {{device}}:desiredTemperature" states="$value" fill="clear">
+                <ftui-icon name="plus" color="my-lightred" size="2"></ftui-icon>
+			</ftui-button>
+		</ftui-column>
+	</ftui-row>
+
+    
+    <ftui-row class="h-35">
+        <ftui-row class="w-20" align-items="left" style="margin-left:0.5em;">
+            <ftui-icon 
+                [color]="{{device}}:mode | map('auto:my-lightgreen, manuell:orange, boost:red')"
+                [name]="{{device}}:mode | map('auto:sani_heating_automatic, manuell:sani_heating_manual, boost:sani_heating_boost')"
+                path="../images/openautomation"
+                class="my-size--2">
+            </ftui-icon>
+        </ftui-row>
+        <ftui-row align-items="center">
+            <ftui-icon name="thermometer1" class="my-size--5"></ftui-icon>
+            <ftui-label	
+                [text]="{{device}}:temperature"
+                [color]="{{device}}:ftui_colorIdx | map('0:orange, 1:my-lightgreen')"><span slot="end">&nbsp;&deg;C</span>
+            </ftui-label>
+            <ftui-icon name="valve" class="my-size--5" style="margin-left:1em;"></ftui-icon>
+            <ftui-label	[text]="{{device}}:valveposition"><span slot="end">&nbsp;&#037;</span></ftui-label>
+        </ftui-row>
+        <ftui-row align-items="right" class="w-20" style="margin-right:0.5em;">
+            <ftui-icon name="battery" class="my-size--5"
+                       [color]="{{device}}:batteryState | map('low:red,.*:')"
+                       [class-name]="{{device}}:batteryState | map('low:my-size--5 blink,.*:my-size--5')"></ftui-icon>
+        </ftui-row>
+    </ftui-row>        
+    
+</ftui-column>
+</ftui-cell>

@@ -1,0 +1,28 @@
+<ftui-row height="12%" class="my-mt-1">
+    <ftui-column width="15%" align-items="right">
+        <ftui-icon 
+            [name]="cal_view:t_{{cal-id}}_source | replace('cal_birthdays','cake-variant') | replace('cal_events','calendar')"
+            [class-name]="cal_view:t_{{cal-id}}_daysleft | multiply(-1) | map('0:my-size--1 hop, 1:my-size--1, .*:my-size--1')">
+            <ftui-badge 
+                [text]="cal_view:t_{{cal-id}}_daysleft | replace(/^0$/,'O')" 
+                class="my-size--1"    
+                [color]="cal_view:t_{{cal-id}}_daysleft | replace(/^0$/,'my-darkred') | replace(/^1$/,'my-lightred') | replace(/^-\d+$/,'dark') | replace(/[1-9]\d*/,'')">
+            </ftui-badge>
+        </ftui-icon>
+    </ftui-column>    
+    <ftui-column width="35%" align-items="left" class="my-ml-2">
+        <ftui-label 
+            size="2"
+            [text]="cal_view:t_{{cal-id}}_bdate | toDate() | format('ee. DD.MM.YY')"
+            [class-name]="cal_view:t_{{cal-id}}_daysleft | multiply(-1) | map('1:thin')">
+        </ftui-label>
+    </ftui-column>    
+    <ftui-column width="50%" align-items="left">
+        <ftui-label 
+            size="2"
+            [text]="cal_view:t_{{cal-id}}_summary | replace('Geburtstag','') | replace('von','')"
+            [class-name]="cal_view:t_{{cal-id}}_daysleft | multiply(-1) | map('1:thin')">
+        </ftui-label>
+    </ftui-column>
+    
+</ftui-row>  

@@ -1,0 +1,66 @@
+
+<ftui-row>
+    <ftui-column class="my-ml-05">
+        <label>Heute</label>
+        <ftui-weather
+            provider="proplantaICON" icon-set="basfill" size="4"
+            [condition]="Wetter_EF_Agrar:fc0_weatherDayIcon | replace('https://www.proplanta.de/wetterdaten/images/symbole/','') | replace('.gif','')"></ftui-weather>
+        <ftui-label [text]="Wetter_EF_Agrar:fc0_weatherDay"></ftui-label>
+        <ftui-label [text]="Wetter_EF_Agrar:fc0_tempMax"><span slot="end">°C</span></ftui-label>
+    </ftui-column>
+    <ftui-column>
+        <label>Morgen</label>
+        <ftui-weather
+            provider="proplantaICON" icon-set="basfill" size="4"
+            [condition]="Wetter_EF_Agrar:fc1_weatherDayIcon | replace('https://www.proplanta.de/wetterdaten/images/symbole/','') | replace('.gif','')"></ftui-weather>
+        <ftui-label [text]="Wetter_EF_Agrar:fc1_weatherDay"></ftui-label>
+        <ftui-label [text]="Wetter_EF_Agrar:fc1_tempMax"><span slot="end">°C</span></ftui-label>
+    </ftui-column>
+    <ftui-column>
+        <ftui-label [text]="Wetter_EF_Agrar:fc2_date | toDate() | format('eeee')"></ftui-label>
+        <ftui-weather
+            provider="proplantaICON" icon-set="basfill" size="4"
+            [condition]="Wetter_EF_Agrar:fc2_weatherDayIcon | replace('https://www.proplanta.de/wetterdaten/images/symbole/','') | replace('.gif','')"></ftui-weather>
+        <ftui-label [text]="Wetter_EF_Agrar:fc2_weatherDay"></ftui-label>
+        <ftui-label [text]="Wetter_EF_Agrar:fc2_tempMax"><span slot="end">°C</span></ftui-label>
+    </ftui-column>
+    <ftui-column>
+        <ftui-label [text]="Wetter_EF_Agrar:fc3_date | toDate() | format('eeee')"></ftui-label>
+        <ftui-weather
+            provider="proplantaICON" icon-set="basfill" size="4"
+            [condition]="Wetter_EF_Agrar:fc3_weatherDayIcon | replace('https://www.proplanta.de/wetterdaten/images/symbole/','') | replace('.gif','')"></ftui-weather>
+        <ftui-label [text]="Wetter_EF_Agrar:fc3_weatherDay"></ftui-label>
+        <ftui-label [text]="Wetter_EF_Agrar:fc3_tempMax"><span slot="end">°C</span></ftui-label>
+    </ftui-column>
+    <ftui-column>
+        <ftui-label [text]="Wetter_EF_Agrar:fc4_date | toDate() | format('eeee')"></ftui-label>
+        <ftui-weather
+            provider="proplantaICON" icon-set="basfill" size="4"
+            [condition]="Wetter_EF_Agrar:fc4_weatherDayIcon | replace('https://www.proplanta.de/wetterdaten/images/symbole/','') | replace('.gif','')"></ftui-weather>
+        <ftui-label [text]="Wetter_EF_Agrar:fc4_weatherDay"></ftui-label>
+        <ftui-label [text]="Wetter_EF_Agrar:fc4_tempMax"><span slot="end">°C</span></ftui-label>
+    </ftui-column>
+    <ftui-column>
+        <ftui-label [text]="Wetter_EF_Agrar:fc5_date | toDate() | format('eeee')"></ftui-label>
+        <ftui-weather
+            provider="proplantaICON" icon-set="basfill" size="4"
+            [condition]="Wetter_EF_Agrar:fc5_weatherDayIcon | replace('https://www.proplanta.de/wetterdaten/images/symbole/','') | replace('.gif','')"></ftui-weather>
+        <ftui-label [text]="Wetter_EF_Agrar:fc5_weatherDay"></ftui-label>
+        <ftui-label [text]="Wetter_EF_Agrar:fc5_tempMax"><span slot="end">°C</span></ftui-label>
+    </ftui-column>
+    <ftui-column>
+        <ftui-label [text]="Wetter_EF_Agrar:fc6_date | toDate() | format('eeee')"></ftui-label>
+        <ftui-weather
+            provider="proplantaICON" icon-set="basfill" size="4"
+            [condition]="Wetter_EF_Agrar:fc6_weatherDayIcon | replace('https://www.proplanta.de/wetterdaten/images/symbole/','') | replace('.gif','')"></ftui-weather>
+        <ftui-label [text]="Wetter_EF_Agrar:fc6_weatherDay"></ftui-label>
+        <ftui-label [text]="Wetter_EF_Agrar:fc6_tempMax"><span slot="end">°C</span></ftui-label>
+    </ftui-column>
+
+    <!-- used
+    <ftui-image id="weather" src="https://www.niederschlagsradar.de/image.ashx?type=regioloop&regio=erf" 
+          interval="1200" nocache width="240px"></ftui-image>    
+    -->
+
+</ftui-row>
+

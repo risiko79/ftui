@@ -1,0 +1,142 @@
+:root {
+
+  --gray: #393939;
+  --gray10: #1a1a1a;
+  --gray15: #272727;
+  --gray20: #333333;
+  --gray25: #3f3f3f;
+  --gray33: #545454;
+  --gray50: #7f7f7f;
+  --gray55: #8c8c8c;
+  --gray75: #bfbfbf;
+  --gray80: #cccccc;
+  --gray85: #d8d8d8;
+  --gray90: #e5e5e5;
+  --gray95: #f2f2f2;
+
+  --red: rgb(219, 72, 70);
+  --red-light: rgb(238, 92, 66);
+  --red-dark: #ed553b;
+  --green: #32a054;
+  --green-light: #3caea3;
+  --green-dark: #365a38;
+  --blue: #3880ff; 
+  --blue-light: #66aaFF;
+  --blue-dark: #173f5f;
+  --yellow: #f6d55c;
+  --yellow-dark: #aa6900;
+  --yellow-light: #ffe066;
+  --orange: #f8b13e;
+  --white: #ffffff;
+  --black: #111111;
+  --black-dark: #000000;  
+  --violet: #9400d3;
+  --transparent: transparent;
+}
+
+[color="my-lightgreen"] {
+  --color-base: var(--green-light);
+  --color-contrast: var(--light-color);
+}
+
+[color="my-orange"] {
+  --color-base: #f1a532;
+  --color-contrast: var(--light-color);
+}
+
+[color="my-lightred"] {
+  --color-base: #ff7088;
+  --color-contrast: var(--light-color);
+}
+
+[color="my-lightblue"] {
+  --color-base: #8ae4ff;
+  --color-contrast: var(--light-color);
+}
+
+[color="my-darkred"] {
+  --color-base: #9e3402;
+  --color-contrast: var(--dark-contrast-color);
+}
+
+.my-spinner {
+  background-color: var(--gray33);
+  border-radius: 0.5em;
+  width: 90%;
+  height: 3.5em;
+}
+
+.my-thermostat {  
+  background-color: var(--gray25);
+  border-radius: 0.3em;
+  width: 20em;
+  height: 8.5em;
+}
+
+.my-header {  
+  background-color: var(--gray15);
+  width: 100%;
+  text-align: center;
+}
+
+.my-size--1 {
+  font-size: 0.7rem;
+}
+
+.my-size--2 {
+  font-size: 0.65rem;
+}
+.my-size--3 {
+  font-size: 0.6rem;
+}
+.my-size--4 {
+  font-size: 0.55rem;
+}
+.my-size--5 {
+  font-size: 0.50rem;
+}
+
+.my-b-red {
+  background-color: red;
+}
+
+.my-ml-05 {
+  margin-left: 0.5em;
+}
+
+.my-ml-1 {
+  margin-left: 1em;
+}
+
+.my-ml-15 {
+  margin-left: 1.5em;
+}
+
+.my-ml-2 {
+  margin-left: 2em;
+}
+
+.my-mt-025 {
+  margin-top: 0.25em;
+}
+
+.my-mt-05 {
+  margin-top: 0.5em;
+}
+
+.my-mt-1 {
+  margin-top: 1em;
+}
+
+.my-mt-15 {
+  margin-top: 1.5em;
+}
+
+.my-mt-2 {
+  margin-top: 2em;
+}
+
+
+
+
+
